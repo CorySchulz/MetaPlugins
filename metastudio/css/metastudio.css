@@ -4,7 +4,7 @@ ul {
 	list-style: none;
 	margin: 0;
 	padding: 0;
-}
+	}
 
 
 /*  ADD BAR  */
@@ -50,18 +50,18 @@ ul {
 	/* placeholder when dragging in from the add bar*/
 	.ui-sortable-placeholder{
 		height: 38px;
-	}
+		}
 
 	/* removes the border when repositionging an element */
 	.ui-sortable-helper a{
 		border-bottom-color: transparent !important;
 		border-left: 2px solid blue !important;
-	}
+		}
 
 	/* actively selected item */
 	#sortable-studio .active{
 		border-right: 10px solid #1282ff;
 		margin-right: -10px;
-	}
+		}
 
 

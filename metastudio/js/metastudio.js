@@ -30,8 +30,9 @@
 
     }
 
-
 }()); // END Meta-Studio Plugin
+
+
 
 MetaStudio.prototype.bindModelStudio = function (ul){
     

@@ -4,17 +4,15 @@
 <head>
   <meta charset="utf-8">
   <title>Metascope</title>
-  <link rel="stylesheet" href="css/normalize.css">
-  <link rel="stylesheet" href="css/style.css">
+  <script src="js/metascope.js"></script>
 </head>
 <body>
 
+Check console for results.
+	
+<script>
 
-	<script src="js/metascope.js"></script>
-	<script>
-
-// Instantiate code
-
+// Declare fixture test data
 var fixtures = [
 {
 	id: "222",
@@ -63,17 +61,18 @@ var fixtures = [
 }
 ];
 
+// Create metascope object with fixture data
 var m = new Metascope({
 	data: fixtures,
+	idkey: "id",
 	rowkey: "studioRow",
 	colkey: "studioCol"
 });
 
-
+// Display data structure in console
 m.log();
 
-
-	</script>
+</script>
 
 </body>
 </htmL>
