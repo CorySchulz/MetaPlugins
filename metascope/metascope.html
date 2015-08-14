@@ -1,0 +1,79 @@
+
+
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Metascope</title>
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+
+	<script src="js/metascope.js"></script>
+	<script>
+
+// Instantiate code
+
+var fixtures = [
+{
+	id: "222",
+	studioRow: 1,
+	studioCol: 1
+},
+{
+	id: "111",
+	studioRow: 0,
+	studioCol: 0
+},
+{
+	id: "444",
+	studioRow: 3,
+	studioCol: 0
+},
+{
+	id: "333",
+	studioRow: 2,
+	studioCol: 1
+},
+{
+	id: "555",
+	studioRow: 4,
+	studioCol: 1
+},
+{
+	id: "666",
+	studioRow: 5,
+	studioCol: 2
+},
+{
+	id: "777",
+	studioRow: 6,
+	studioCol: 2
+},
+{
+	id: "888",
+	studioRow: 7,
+	studioCol: 3
+},
+{
+	id: "999",
+	studioRow: 8,
+	studioCol: 1
+}
+];
+
+var m = new Metascope({
+	data: fixtures,
+	rowkey: "studioRow",
+	colkey: "studioCol"
+});
+
+
+m.log();
+
+
+	</script>
+
+</body>
+</htmL>

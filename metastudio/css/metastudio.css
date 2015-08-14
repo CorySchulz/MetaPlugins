@@ -1,0 +1,67 @@
+*{	box-sizing: border-box;	}
+
+ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+
+/*  ADD BAR  */
+#studio-add-bar{
+	position: relative;
+	left: 33px;
+	}
+
+/*  STUDIO LIST  */
+#sortable-studio{
+	list-style: none;
+	padding-right: 10px;
+	left: 33px;
+	right: 0;
+	position: absolute;
+	}
+
+	/* normal studio look */
+	#sortable-studio li a{
+		border-bottom: 2px solid #666;
+		height: auto;
+		padding: 12px 0 6px 6px;
+		display: block;
+		text-decoration: none;
+		color: #000;
+		-webkit-transform-style: preserve-3d;
+		}
+
+	/* normal studio hover look */
+	#sortable-studio li a:hover{
+		border-bottom-color: blue;
+		color: blue;
+		}
+
+	/* new item that's being dragged out*/
+	.new-item-helper{
+		height: 30px !important;
+		width: 200px !important;
+		background: rgba(18, 130, 255, 0.25);
+		border-left: 2px solid blue !important;
+		}
+
+	/* placeholder when dragging in from the add bar*/
+	.ui-sortable-placeholder{
+		height: 38px;
+	}
+
+	/* removes the border when repositionging an element */
+	.ui-sortable-helper a{
+		border-bottom-color: transparent !important;
+		border-left: 2px solid blue !important;
+	}
+
+	/* actively selected item */
+	#sortable-studio .active{
+		border-right: 10px solid #1282ff;
+		margin-right: -10px;
+	}
+
+
