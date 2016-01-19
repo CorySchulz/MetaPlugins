@@ -1,6 +1,4 @@
 
-
-
 //! metastudio.js
 //! version : 0.0.1
 //! authors : Cory Schulz
@@ -16,22 +14,16 @@
         //              CONSTRUCTOR DECLARATIONS
         ////////////////////////////////////////////////////////
 
-        // Set defaults
-        var _ = this;
-
-        // Read arguments passed in
-            var property, properties = arguments[0];
-            for (property in properties) {
-                if (properties.hasOwnProperty(property)) {
-                    // Set the new value
-                    this[property] = properties[property];
-                }
-            }
+        // If we got an argument passed in
+        var properties = arguments[0];
+        if (properties){
+            // Bind to 
+            this.bindModelStudio(properties);
+        }
 
     }
 
 }()); // END Meta-Studio Plugin
-
 
 
 MetaStudio.prototype.bindModelStudio = function (ul){
@@ -62,8 +54,6 @@ MetaStudio.prototype.bindModelStudio = function (ul){
 
         	var newPos = "";
 
-            // Get new position
-         
             // If it's a new item from the add bar
             if (ui.helper[0].style.left){ 
             	// Subtract 50 for the left difference
@@ -73,8 +63,6 @@ MetaStudio.prototype.bindModelStudio = function (ul){
             }else{
                 newPos = ui.position.left + parseInt(ui.item.attr('startpos') ) ;
             }
-
-        
 
         	// Get rid of any extra pixels and make sure everything snaps back to the 50 px grid
         	newPos = (50 * Math.floor(newPos / 50));

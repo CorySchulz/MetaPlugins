@@ -7,7 +7,6 @@
 //! license : none
 //! xxxxxxx.com
 
-
 (function (undefined) {
 
 	// Define our constructor
@@ -19,24 +18,22 @@
 
 			// Set defaults
 			var _ = this;
-			this.data = [];
-			this.idkey = "id";
-			this.rowkey = "row";
-			this.colkey = "col";
+			_.data = [];
+			_.idkey = "id";
+			_.rowkey = "row";
+			_.colkey = "col";
 
-			// Read arguments passed in
-	    	var property, properties = arguments[0];
+			// Read in and save arguments
+			var property, properties = arguments[0];
 			for (property in properties) {
 				if (properties.hasOwnProperty(property)) {
 					// Set the new value
-					this[property] = properties[property];
+					_[property] = properties[property];
 				}
 			}
 
-			// If we got data, make sure it's sorted by row
-			if (arguments[0] && arguments[0]['data']){
-				this.data = this.data.sort(sortByRow);
-			}
+			// Sort data by row
+			_.data.sort(sortByRow)
 
 			// Sort by row compare funcion
 			function sortByRow(a, b) {
@@ -45,7 +42,7 @@
 				}else if (a[_.rowkey] > b[_.rowkey]) {
 					return 1;
 				}
-				return 0; // must be equal - this can't happen
+				return 0; // must be equal - this isn't possible if the data is correct
 			}
 
 	} // END Metascope constructor
@@ -58,8 +55,10 @@
 		// **************** ROOT FUNCTIONS ****************
 			Metascope.prototype = {
 				getRoots: function(){	// Get the root nodes
+
 					if (this.data.length == 0){ return []; }
-			    	var res = []
+			    	var res = [];
+
 			    	// for each item in the data array
 			    	for (var i = 0; i < this.data.length; ++i){
 			    		// if the column value is 0, it's a root
@@ -70,6 +69,7 @@
 			    	return res;
 		    	},
 		    	getRootIndex: function(node){		// Get the indes of this root node
+
 		    		if (node == null){ return -1; }
 			    	var roots = this.getRoots().sort(this.sortByRow);
 			    	var res = -1;
@@ -108,7 +108,6 @@
 					var data = this.data;
 					var nodeIndex = data.indexOf(node);
 					var colPos = node[colkey];
-
 
 					// If we're a root node, we don't have any parents :(
 					if (node[colkey] == 0){ return 0; }
