@@ -188,7 +188,7 @@
 		
 
 		// **************** CHILD FUNCTIONS ****************
-				getDescendants: function(node){  		// Get all decendants
+				getDescendants: function(node){  		// Get all decendants - Children and grand childre, etc.
 					if (node == null){ return []; }
 
 			    	var res = [];
@@ -227,7 +227,7 @@
 					
 					return res;
 			    },
-			    getChildren: function(node){		// Get all children
+			    getChildren: function(node){		// Get the children - no grandchildren
 			    	if (node == null){ return []; }
 			    	if (node == 0) { return this.getRoots(); }
 
@@ -307,6 +307,7 @@
 
 
 		// **************** SIBLING FUNCTIONS ****************
+				/*
 				getSiblingsAbove: function(node){		// Get siblings above
 			    	console.log('sib above');
 			    	// Get all siblings
@@ -323,7 +324,9 @@
 			    	// Remove siblings above, including node
 			    	return 1;
 			    },
-			    getAllSiblings: function(node){			// Get all siblings
+			    */
+
+			    getAllSiblings: function(node){		// Get all siblings
 			    	
 			    	// If string id, we gotta search for the object
 		    		if (typeof node === 'string'){ 
@@ -339,7 +342,7 @@
 						return this.getRoots();
 					}
 
-					// The the parent, then get all children
+					// Get the parent, then get all children
 			    	var res = this.getChildren( this.getParent(node) );
 
 			    	// Remove node from the children list ??  <- Decoded to leave original node in there
@@ -409,8 +412,9 @@
 
 					this.sortDataByRow();	// Make sure the data is sorted by row
 					
-					// Compile it
+					// Go through each row
 					for (var i=0; i < data.length; ++i){
+						// Indent once for every column
 						for (var k=0; k < data[i][colkey]; ++k){
 							res += "|   ";
 						}

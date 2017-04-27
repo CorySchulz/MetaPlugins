@@ -8,69 +8,69 @@
 </head>
 <body>
 
-Check console for results.
+<textarea id="results" style="width: 300px; height: 300px"></textarea>
 	
 <script>
 
-// Declare fixture test data
-var fixtures = [
+// Test Data
+var data = [
 {
 	id: "222",
-	studioRow: 1,
-	studioCol: 1
+	row: 1,
+	col: 1
 },
 {
 	id: "111",
-	studioRow: 0,
-	studioCol: 0
+	row: 0,
+	col: 0
 },
 {
 	id: "444",
-	studioRow: 3,
-	studioCol: 0
+	row: 3,
+	col: 0
 },
 {
 	id: "333",
-	studioRow: 2,
-	studioCol: 1
+	row: 2,
+	col: 1
 },
 {
 	id: "555",
-	studioRow: 4,
-	studioCol: 1
+	row: 4,
+	col: 1
 },
 {
 	id: "666",
-	studioRow: 5,
-	studioCol: 2
+	row: 5,
+	col: 2
 },
 {
 	id: "777",
-	studioRow: 6,
-	studioCol: 2
+	row: 6,
+	col: 2
 },
 {
 	id: "888",
-	studioRow: 7,
-	studioCol: 3
+	row: 7,
+	col: 3
 },
 {
 	id: "999",
-	studioRow: 8,
-	studioCol: 1
+	row: 8,
+	col: 1
 }
 ];
 
 // Create metascope object with fixture data
 var m = new Metascope({
-	data: fixtures,
+	data: data,
 	idkey: "id",
-	rowkey: "studioRow",
-	colkey: "studioCol"
+	rowkey: "row",
+	colkey: "col"
 });
 
-// Display data structure in console
-m.log();
+// Display data structure in DOM
+document.getElementById('results').innerHTML = m.toString();
 
 </script>
 
