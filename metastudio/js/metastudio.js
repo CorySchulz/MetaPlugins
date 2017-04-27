@@ -96,7 +96,7 @@ MetaStudio.prototype.bindModelStudio = function (ul){
             $(ul + ' .new-studio-item').removeClass('ui-draggable-handle');
             $(ul + ' .new-studio-item').removeClass('ui-draggable');
              
-            $(ul + ' .new-item-item').removeClass('new-studio-item');
+            $(ul + ' .new-studio-item').removeClass('new-studio-item');
             
             //updateStudioItems();
         }
