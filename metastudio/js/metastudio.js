@@ -41,27 +41,40 @@ MetaStudio.prototype.bindModelStudio = function (ul){
         scrollSpeed: 100,
     
         start: function(event, ui) {
-            
+
         	// Save start position
             var item = ui.item;
-          	item.attr('startpos', item.find( "a" ).css('margin-left'));
+          	item.attr('data-startpos', item.css('margin-left'));
 
             // Get child div and add dragging class
-        	item.find( "a" ).addClass("dragging");
+        	item.addClass("dragging");
         },
 
         beforeStop : function(event, ui) {
 
         	var newPos = "";
+            var isNew = false;
+
+            // If it doesn't have an id it's a new object.
+            // Give it a temporary one and create a new object
+            if (ui.item.attr("id") == null){
+                
+                isNew = true;
+            }
 
             // If it's a new item from the add bar
-            if (ui.helper[0].style.left){ 
+            if (ui.item.attr("id") == null){ 
             	// Subtract 50 for the left difference
+                ui.item.attr("id", guidGenerator() );
                 newPos = parseInt(ui.helper[0].style.left);
+                console.log('newPos', newPos);
 
-            // We're moving an object that's already in the list
-            }else{
-                newPos = ui.position.left + parseInt(ui.item.attr('startpos') ) ;
+            
+            }else{  // We're moving an object that's already in the list
+                // get the original start position
+                console.log('\n\nUI POS', ui.position.left );
+                console.log('Saved pos', parseInt(ui.item.attr('data-startpos') ));
+                newPos = ui.position.left + parseInt(ui.item.attr('data-startpos') ) ;
             }
 
         	// Get rid of any extra pixels and make sure everything snaps back to the 50 px grid
@@ -69,28 +82,21 @@ MetaStudio.prototype.bindModelStudio = function (ul){
         	
             // Keep position non-negative
         	if (newPos < 0) newPos = 0;
-        	
-            // Set column position of dragged bar
-            ui.item.find( "a" ).css('margin-left', newPos);
+
+            // Set column position of dragged row
+            ui.item.css('margin-left', newPos);
             
-            // If it doesn't have an id it's a new object.
-            // Give it a temporary one and create a new object
-    		if (ui.item.find( "a" ).attr("id") == null){
-                var tempId = guidGenerator();
-                ui.item.find( "a" ).attr("id", tempId );
-                //createNewBlock(tempId, (newPos/50), $('#sortable-studio li').index(ui.item) );
-    		}
         }, // Before Stop
         
         stop: function(e, ui) {
             // Remove drag class
-            ui.item.find( "a" ).removeClass("dragging");
-            // Update html
-            $(ul + ' .new-studio-item a').html("Untitled");
+            ui.item.removeClass("dragging");
+            // Update html for new element
+            $(ul + ' .new-studio-item').html("Untitled");
             $(ul + ' .new-studio-item').removeClass('ui-draggable-handle');
             $(ul + ' .new-studio-item').removeClass('ui-draggable');
              
-            $(ul + ' .new-studio-item').removeClass('new-studio-item');
+            $(ul + ' .new-item-item').removeClass('new-studio-item');
             
             //updateStudioItems();
         }
@@ -105,16 +111,15 @@ MetaStudio.prototype.bindModelStudio = function (ul){
         connectToSortable: ul,
         opacity: 0.7,
 
-    	helper: function(e, ui) {
+    	helper: function(e) {
             // Return helper element
-            return $( '<li class="new-item-helper"><div></div></li>' );
+            return $( '<div class="new-item-helper"><div>Hello</div></div>' );
         }
     });
 
         
 } // END MetaStudio.prototype.bindModelStudio 
-  
-  
+
   
 function guidGenerator() {
         return 'temp' + 'xxxxxxxxxxxxxxxxxxxxxxxx'.replace(/[xy]/g, function(c) {

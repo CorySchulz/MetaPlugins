@@ -19,11 +19,12 @@ ul {
 	padding-right: 10px;
 	left: 33px;
 	right: 0;
-	position: absolute;
+	position: relative;
+	width: 80%;
 	}
 
 	/* normal studio look */
-	#sortable-studio li a{
+	#sortable-studio li{
 		border-bottom: 2px solid #666;
 		height: auto;
 		padding: 12px 0 6px 6px;
@@ -34,7 +35,7 @@ ul {
 		}
 
 	/* normal studio hover look */
-	#sortable-studio li a:hover{
+	#sortable-studio li:hover{
 		border-bottom-color: blue;
 		color: blue;
 		}
@@ -53,7 +54,7 @@ ul {
 		}
 
 	/* removes the border when repositionging an element */
-	.ui-sortable-helper a{
+	.ui-sortable-helper{
 		border-bottom-color: transparent !important;
 		border-left: 2px solid blue !important;
 		}
