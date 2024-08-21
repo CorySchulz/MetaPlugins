@@ -51,6 +51,7 @@ MetaStudio.prototype.bindModelStudio = function (ul){
         },
 
         beforeStop : function(event, ui) {
+            console.log('beforeStop')
 
         	var newPos = "";
             var isNew = false;

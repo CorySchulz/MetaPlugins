@@ -68,7 +68,7 @@
 			    	}
 			    	return res;
 		    	},
-		    	getRootIndex: function(node){		// Get the indes of this root node
+		    	getRootIndex: function(node){		// Get the index of this root node
 
 		    		if (node == null){ return -1; }
 			    	var roots = this.getRoots().sort(this.sortByRow);
@@ -331,18 +331,18 @@
 			    	// If string id, we gotta search for the object
 		    		if (typeof node === 'string'){ 
 		    			node = this.getNodeWithId(node);
-					}
+						}
 
 			    	if (node == null || node == 0 ){  // Can't get siblings of origin or null
 			    		return -1;
 			    	}
 
 			    	// If we're a root, just get the roots
-					if (node[this.colkey] == 0){
-						return this.getRoots();
-					}
+						if (node[this.colkey] == 0){
+							return this.getRoots();
+						}
 
-					// Get the parent, then get all children
+						// Get the parent, then get all children
 			    	var res = this.getChildren( this.getParent(node) );
 
 			    	// Remove node from the children list ??  <- Decoded to leave original node in there
