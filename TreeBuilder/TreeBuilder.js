@@ -286,7 +286,6 @@ class TreeBuilder {
     return _.data.findIndex(item => item[_.idKey] === id);
   }
 
-
   /**
    * Converts the hierarchy to a string representation.
    * @returns {string} The string representation of the hierarchy.
@@ -307,7 +306,6 @@ class TreeBuilder {
     console.log(_.toString());
   }
 }
-
 
 // Conditional export as Universal Module
 if (typeof module !== 'undefined' && module.exports) {
