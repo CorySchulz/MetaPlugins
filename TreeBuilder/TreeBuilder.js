@@ -248,8 +248,8 @@ class TreeBuilder {
     _.sortDataByRow();
   }
 
-  /**
-   * Shifts a node and all its children to a new position.
+   /**
+   * Shifts a node and all its children to a new position, adjusting other nodes as necessary.
    * @param {Object|string} node - The node or node ID to shift.
    * @param {number} newCol - The new column value for the node.
    * @param {number} newRow - The new row value for the node.
@@ -261,20 +261,85 @@ class TreeBuilder {
     }
     if (!node) return;
 
-    const colDiff = newCol - node[_.colKey];
+    const oldIndex = _.data.indexOf(node);
+    if (oldIndex === -1) return;
+
+    const colDiff = Math.max(0, newCol) - node[_.colKey];
     const rowDiff = newRow - node[_.rowKey];
     const descendants = _.getDescendants(node);
+    const nodesToShift = [node, ...descendants];
+    const shiftSize = nodesToShift.length;
 
-    node[_.colKey] = newCol;
-    node[_.rowKey] = newRow;
+    // Determine shift direction
+    const isForwardShift = newRow > node[_.rowKey];
 
-    descendants.forEach(desc => {
-      desc[_.colKey] += colDiff;
-      desc[_.rowKey] += rowDiff;
+    // Remove the node and its descendants from the current position
+    _.data.splice(oldIndex, shiftSize);
+
+    // Update the node and its descendants
+    nodesToShift.forEach(n => {
+      n[_.colKey] = Math.max(0, n[_.colKey] + colDiff);
+      n[_.rowKey] += rowDiff;
+    });
+
+    // Find the new insertion index
+    let insertionIndex;
+    if (isForwardShift) {
+      insertionIndex = _.data.findIndex(item => item[_.rowKey] > newRow);
+      if (insertionIndex === -1) insertionIndex = _.data.length;
+    } else {
+      insertionIndex = _.data.findIndex(item => item[_.rowKey] >= newRow);
+      if (insertionIndex === -1) insertionIndex = _.data.length;
+    }
+
+    // Insert the updated nodes at the new position
+    _.data.splice(insertionIndex, 0, ...nodesToShift);
+
+    // Update rows for all nodes
+    _.data.forEach((item, index) => {
+      item[_.rowKey] = index;
     });
 
     _.sortDataByRow();
   }
+
+  /**
+   * Normalizes the tree structure by left-aligning nodes.
+   */
+  normalizeTree() {
+    const _ = this;
+    
+    // Helper function to get the correct column for a node
+    const getCorrectColumn = (node, index) => {
+      if (index === 0 || node[_.colKey] === 0) return 0;
+      
+      const parent = _.getParent(node);
+      if (parent) {
+        return parent[_.colKey] + 1;
+      }
+      
+      return 0;
+    };
+
+    // Traverse the tree and adjust column values
+    _.data.forEach((node, index) => {
+      const correctColumn = getCorrectColumn(node, index);
+      if (node[_.colKey] !== correctColumn) {
+        const colDiff = correctColumn - node[_.colKey];
+        node[_.colKey] = correctColumn;
+        
+        // Adjust all descendants
+        const descendants = _.getDescendants(node);
+        descendants.forEach(desc => {
+          desc[_.colKey] += colDiff;
+        });
+      }
+    });
+
+    // Final sort to ensure correct order
+    _.sortDataByRow();
+  }
+
 
   /**
    * Gets the index of a node with a specific ID.
